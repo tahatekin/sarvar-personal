@@ -7,21 +7,37 @@ const posts = [
     date: "Oct 12, 2025",
     title: "Interview on CBS: New business approach",
     href: "https://x.com/_mayweather",
+    tag: "Interview",
+    tagColor: "#0f3460",
+    tagBg: "#0f346010",
+    tagBorder: "#0f346030",
   },
   {
     date: "Oct 12, 2025",
     title: "Article: How to implement business strategy",
     href: "https://x.com/_mayweather",
+    tag: "Article",
+    tagColor: "#e94560",
+    tagBg: "#e9456010",
+    tagBorder: "#e9456030",
   },
   {
     date: "Oct 12, 2025",
     title: "News: What's new in an automobile industry",
     href: "https://x.com/_mayweather",
+    tag: "News",
+    tagColor: "#16213e",
+    tagBg: "#16213e10",
+    tagBorder: "#16213e30",
   },
   {
     date: "Oct 12, 2025",
     title: "Article: Reface implemented some new things",
     href: "https://x.com/_mayweather",
+    tag: "Article",
+    tagColor: "#e94560",
+    tagBg: "#e9456010",
+    tagBorder: "#e9456030",
   },
 ];
 
@@ -53,21 +69,21 @@ export default function Blog() {
   const ref = useReveal();
 
   return (
-    <section id="blog" className="py-24 md:py-32 border-t border-[#e5e5e5]">
+    <section id="blog" className="py-24 md:py-32 border-t border-[#e2e8f0]">
       <div className="max-w-[1200px] mx-auto px-8">
         <div ref={ref}>
-          <p className="text-xs tracking-[0.25em] uppercase text-[#999] mb-3">Blog</p>
+          <p className="text-xs tracking-[0.25em] uppercase text-[#e94560] font-semibold mb-3">Blog</p>
           <h2 className="text-[clamp(36px,5vw,56px)] font-bold tracking-tight text-[#0a0a0a] mb-4">
-            What I Share
+            What I <span className="gradient-text">Share</span>
           </h2>
-          <p className="text-[#666] text-base md:text-lg max-w-xl mb-2 leading-relaxed">
+          <p className="text-[#6b7280] text-base md:text-lg max-w-xl mb-2 leading-relaxed">
             Here you can read my news, business insights, and other experiences.
           </p>
-          <p className="text-[#666] text-base md:text-lg max-w-xl mb-16 leading-relaxed">
+          <p className="text-[#6b7280] text-base md:text-lg max-w-xl mb-16 leading-relaxed">
             It&apos;s incredibly important to share knowledge with those who have chosen the same path as you.
           </p>
 
-          <div className="divide-y divide-[#e5e5e5]">
+          <div className="divide-y divide-[#e2e8f0]">
             {posts.map((post, i) => (
               <a
                 key={i}
@@ -76,9 +92,15 @@ export default function Blog() {
                 rel="noopener noreferrer"
                 className="flex flex-col md:flex-row md:items-center justify-between py-7 gap-2 group"
               >
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-10">
-                  <span className="text-sm text-[#999] shrink-0 tabular-nums">{post.date}</span>
-                  <h3 className="text-base md:text-lg font-medium text-[#0a0a0a] group-hover:opacity-60 transition-opacity">
+                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+                  <span className="text-sm text-[#9ca3af] shrink-0 tabular-nums">{post.date}</span>
+                  <span
+                    className="text-xs font-medium px-2.5 py-1 rounded-full shrink-0 hidden md:inline-block"
+                    style={{ color: post.tagColor, backgroundColor: post.tagBg, border: `1px solid ${post.tagBorder}` }}
+                  >
+                    {post.tag}
+                  </span>
+                  <h3 className="text-base md:text-lg font-medium text-[#0a0a0a] group-hover:text-[#0f3460] transition-colors">
                     {post.title}
                   </h3>
                 </div>
@@ -87,7 +109,7 @@ export default function Blog() {
                   height="18"
                   viewBox="0 0 18 18"
                   fill="none"
-                  className="text-[#bbb] group-hover:text-[#0a0a0a] transition-colors shrink-0 group-hover:translate-x-1 duration-200 hidden md:block"
+                  className="text-[#cbd5e1] group-hover:text-[#0f3460] transition-colors shrink-0 group-hover:translate-x-1 duration-200 hidden md:block"
                 >
                   <path
                     d="M3.75 9h10.5M9.75 4.5l4.5 4.5-4.5 4.5"

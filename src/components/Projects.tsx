@@ -1,32 +1,52 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import Image from "next/image";
 
 const projects = [
   {
     name: "Reliable Center",
     type: "Childcare Center",
     year: "2026",
-    roles: ["Entrepreneur", "Investor"],
     href: "https://karta.framer.website",
-    roleColors: ["#e94560", "#0f3460"],
+    image: "/project1-img.png",
+    logo: "/project1-logo.svg",
+    roles: [
+      { label: "Entrepreneur", bg: "rgb(232, 234, 237)", text: "rgb(0, 0, 0)" },
+      { label: "Investor", bg: "rgb(150, 183, 200)", text: "rgb(255, 255, 255)" },
+    ],
   },
   {
     name: "Lumina Auto",
     type: "Auto Center",
     year: "2025",
-    roles: ["Investor", "Business Partner"],
     href: "https://astralab.framer.website",
-    roleColors: ["#0f3460", "#1a1a2e"],
+    image: "/project2-img.png",
+    logo: "/project2-logo.svg",
+    roles: [
+      { label: "Investor", bg: "rgb(150, 183, 200)", text: "rgb(255, 255, 255)" },
+      { label: "Business Partner", bg: "rgb(136, 95, 168)", text: "rgb(255, 255, 255)" },
+    ],
   },
   {
     name: "Department of Function",
     type: "Healthcare Organization",
     year: "2024",
-    roles: ["Advisor", "Entrepreneur"],
     href: "https://realagent.framer.website",
-    roleColors: ["#16213e", "#e94560"],
+    image: "/project3-img.png",
+    logo: "/project3-logo.svg",
+    roles: [
+      { label: "Advisor", bg: "rgb(218, 234, 86)", text: "rgb(0, 0, 0)" },
+      { label: "Entrepreneur", bg: "rgb(232, 234, 237)", text: "rgb(0, 0, 0)" },
+    ],
   },
+];
+
+const carouselItems = [
+  { image: "/carousel1.png", logo: "/carousel1-logo.svg" },
+  { image: "/carousel2.png", logo: "/carousel2-logo.svg" },
+  { image: "/carousel3.png", logo: "/carousel3-logo.svg" },
+  { image: "/carousel4.png", logo: "/carousel4-logo.svg" },
 ];
 
 function useReveal() {
@@ -57,96 +77,162 @@ export default function Projects() {
   const ref = useReveal();
 
   return (
-    <section id="projects" className="py-24 md:py-32 border-t border-[#e2e8f0]">
-      <div className="max-w-[1200px] mx-auto px-8">
+    <section
+      id="projects"
+      className="relative py-24 md:py-32 overflow-hidden"
+      style={{ backgroundColor: "rgb(16, 16, 16)" }}
+    >
+      {/* Dot pattern background */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-60"
+        style={{
+          backgroundImage: "url('/projects-dots.png')",
+          backgroundRepeat: "repeat",
+          backgroundPosition: "left top",
+          backgroundSize: "60px auto",
+        }}
+      />
+
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 relative z-10">
         <div ref={ref}>
-          <p className="text-xs tracking-[0.25em] uppercase text-[#e94560] font-semibold mb-3">Projects</p>
-          <h2 className="text-[clamp(36px,5vw,56px)] font-bold tracking-tight text-[#0a0a0a] mb-4">
-            What I&apos;m <span className="gradient-text">Proud of</span>
-          </h2>
-          <p className="text-[#6b7280] text-base md:text-lg max-w-lg mb-16 leading-relaxed">
-            These are projects I&apos;ve created, actively contributed to, or supported as an investor and partner.
+          {/* Header */}
+          <div className="text-center mb-6">
+            <h6 className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-white mb-4">
+              Projects
+            </h6>
+            <h2 className="text-[clamp(36px,5vw,56px)] font-bold tracking-tight text-white mb-5">
+              What I&apos;m Proud of
+            </h2>
+          </div>
+          <p className="text-center text-sm sm:text-base text-[rgb(193,200,201)] max-w-lg mx-auto mb-16 md:mb-20 leading-relaxed">
+            These are projects I&apos;ve created, actively contributed to, or
+            supported as an investor and partner.
           </p>
 
-          <div className="divide-y divide-[#e2e8f0]">
+          {/* Project cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20">
             {projects.map((project) => (
               <a
                 key={project.name}
                 href={project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col md:flex-row md:items-center justify-between py-8 md:py-10 gap-4 group card-hover rounded-lg -mx-4 px-4"
+                className="group block"
               >
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-12">
-                  <span className="text-5xl md:text-6xl font-bold tabular-nums leading-none transition-all duration-300"
-                    style={{ color: "#e2e8f0" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "#cbd5e1")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "#e2e8f0")}
-                  >
-                    {project.year}
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#0a0a0a] group-hover:text-[#0f3460] transition-colors">
+                <div className="flex flex-col items-center text-center">
+                  {/* Project name and info */}
+                  <div className="mb-6">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 group-hover:opacity-80 transition-opacity">
                       {project.name}
                     </h3>
-                    <p className="text-sm text-[#9ca3af] mt-0.5">{project.type}</p>
+                    <div className="flex items-center justify-center gap-3 text-sm text-[rgb(193,200,201)]">
+                      <span>{project.type}</span>
+                      <span>{project.year}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex gap-2">
-                    {project.roles.map((role, i) => (
+
+                  {/* Circular image with spinning ellipse and logo */}
+                  <div className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] md:w-[260px] md:h-[260px] lg:w-[310px] lg:h-[310px] mb-6">
+                    {/* Spinning dashed ellipse */}
+                    <img
+                      src="/project-ellipse.png"
+                      alt=""
+                      className="absolute top-1/2 left-1/2 w-[110%] h-[110%] animate-spin-slow pointer-events-none"
+                    />
+
+                    {/* Main circular card */}
+                    <div
+                      className="absolute top-1/2 left-1/2 w-[85%] h-[85%] rounded-full overflow-hidden"
+                      style={{
+                        transform: "translate(-50%, -50%)",
+                        backgroundColor: "rgb(232, 234, 237)",
+                      }}
+                    >
+                      {/* Logo at top */}
+                      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 w-12 h-8">
+                        <Image
+                          src={project.logo}
+                          alt=""
+                          width={62}
+                          height={40}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      {/* Dark overlay */}
+                      <div className="absolute inset-0 bg-black/10 rounded-lg z-[1]" />
+                      {/* Project image */}
+                      <div className="absolute inset-0">
+                        <Image
+                          src={project.image}
+                          alt={project.name}
+                          width={640}
+                          height={640}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Role badges */}
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {project.roles.map((role) => (
                       <span
-                        key={role}
-                        className="text-xs font-medium px-3 py-1.5 rounded-full border"
+                        key={role.label}
+                        className="text-xs sm:text-sm font-medium px-4 py-1.5 rounded-[20px]"
                         style={{
-                          color: project.roleColors[i],
-                          borderColor: project.roleColors[i] + "40",
-                          backgroundColor: project.roleColors[i] + "10",
+                          backgroundColor: role.bg,
+                          color: role.text,
                         }}
                       >
-                        {role}
+                        {role.label}
                       </span>
                     ))}
                   </div>
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    className="text-[#cbd5e1] group-hover:text-[#0f3460] transition-colors shrink-0 ml-2 group-hover:translate-x-1 duration-200"
-                  >
-                    <path
-                      d="M3.75 9h10.5M9.75 4.5l4.5 4.5-4.5 4.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
                 </div>
               </a>
             ))}
           </div>
 
-          <div className="mt-10">
-            <button className="text-sm text-[#6b7280] hover:text-[#0f3460] transition-colors flex items-center gap-2 group">
-              Other projects
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                className="group-hover:translate-x-1 transition-transform"
-              >
-                <path
-                  d="M2.5 7h9M7.5 3l4 4-4 4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+          {/* Other projects heading */}
+          <h4 className="text-center text-lg sm:text-xl font-semibold text-white mb-10">
+            Other projects
+          </h4>
+
+          {/* Infinite carousel */}
+          <div className="overflow-hidden relative">
+            {/* Fade edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[rgb(16,16,16)] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[rgb(16,16,16)] to-transparent z-10 pointer-events-none" />
+
+            <div className="flex animate-carousel gap-[30px] w-max">
+              {[...carouselItems, ...carouselItems, ...carouselItems, ...carouselItems].map(
+                (item, i) => (
+                  <div
+                    key={i}
+                    className="w-[300px] sm:w-[380px] md:w-[427px] h-[210px] sm:h-[260px] md:h-[297px] rounded-[10px] overflow-hidden relative shrink-0 group/card"
+                  >
+                    {/* Logo */}
+                    <div className="absolute top-3 left-4 z-10 h-6 sm:h-8">
+                      <img
+                        src={item.logo}
+                        alt=""
+                        className="h-full w-auto object-contain"
+                      />
+                    </div>
+                    {/* Dark overlay */}
+                    <div className="absolute inset-0 bg-black/5 rounded-lg z-[1]" />
+                    {/* Image */}
+                    <Image
+                      src={item.image}
+                      alt=""
+                      width={854}
+                      height={594}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
